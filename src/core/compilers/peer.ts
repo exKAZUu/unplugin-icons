@@ -11,6 +11,6 @@ import { importModule, resolveModule } from 'local-pkg'
  * from this package first and fall back to the user's project.
  */
 export async function importPeerModule<T = any>(name: string): Promise<T> {
-  const resolved = resolveModule(name, { paths: [import.meta.url, process.cwd()] })
+  const resolved = resolveModule(name, { paths: [import.meta.url, pathToFileURL(process.cwd()).href] })
   return await importModule(resolved ? pathToFileURL(resolved).href : name)
 }
